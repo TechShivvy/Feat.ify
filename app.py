@@ -149,13 +149,13 @@ def get_songs(artistName):
         except Exception as e:
             print(f"Failed to parse table '{table}'. Error: {str(e)}")
 
-    print(
-        tabulate(
-            (row[:3] for row in sql),
-            headers=["Track", "Artist", "Album"],
-            tablefmt="pretty",
-        )
-    )
+    # print(
+    #     tabulate(
+    #         (row[:3] for row in sql),
+    #         headers=["Track", "Artist", "Album"],
+    #         tablefmt="pretty",
+    #     )
+    # ) #dev
     return sql
 
 
@@ -181,7 +181,7 @@ def create_playlist(track_uris, artistName, username, sp, playlist_id=None):
         print(
             f"Playlist created: {sp.playlist(playlist_id)['external_urls']['spotify']}"
         )
-        print("Tracks added to playlist with response:", add_tracks_response)
+        #print("Tracks added to playlist with response:", add_tracks_response) #dev
         return playlist_id, []
     except Exception as e:
         print("Error creating or adding tracks to the playlist:", str(e))
@@ -246,16 +246,17 @@ def get_tracks_from_spotify(songs, artistName, sp):
         track_uris = []
         for song in songs:
             queries = get_queries(song, artistName)
-            print()
+            # print() #dev
             for query in queries:
                 song_id = get_track_id(query, sp)
-                print(query)
+                # print(query) #dev
                 if song_id:
                     track_uris.append(song_id)
                     break
             else:
-                print(f"No results found for '{song[0]}'")
-            print()
+                pass
+                #print(f"No results found for '{song[0]}'") #dev
+            #print() #dev
         return track_uris
     except Exception as e:
         print("Error getting tracks from Spotify:", str(e))
@@ -305,20 +306,20 @@ def register():
                     400,
                 )
 
-            print(username)
-            print(email)
-            print(age)
+            # print(username)   #dev
+            # print(email)  #dev
+            # print(age)    #dev
 
             # Send the form details to the email
             subject = f"{username}'s Registration Form"
             body = f"Username: {username}\nEmail: {email}\nAge: {age}"
             if send_email(subject, body):
-                print("Form details sent to email!")
+                #print("Form details sent to email!")   #dev
                 return jsonify(
                     {"status": "success", "message": "Mail sent successfully."}
                 )
             else:
-                print("Failed to send email!")
+                #print("Failed to send email!") #dev
                 return jsonify({"status": "error", "message": "Failed to send email."})
         except Exception as e:
             print(f"Error processing the request: {e}")
@@ -371,7 +372,7 @@ def get_songs_route():
         if songs_data:
             sp_oauth = create_spotify_oauth()
             auth_url = sp_oauth.get_authorize_url()
-            print(auth_url)
+            #print(auth_url) #dev
             # return redirect(auth_url)
             return jsonify(
                 {
@@ -463,8 +464,8 @@ def get_tracks():
 
     user_info = sp.me()
     user_id = user_info["id"]
-    print("Your Spotify username is:", user_id)
-    print("Access token obtained successfully!")
+    #print("Your Spotify username is:", user_id) #dev
+    #print("Access token obtained successfully!") #dev
 
     max_elements_per_list = 100
     track_uri_chunks = split_into_nested_lists(track_uris, max_elements_per_list)
