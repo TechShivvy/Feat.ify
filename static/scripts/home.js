@@ -101,7 +101,7 @@ searchForm.addEventListener("submit", async function (event) {
         const responseData = await response.json();
         if (responseData.status === "ok") {
           // Open the authorization URL in a new window
-          console.error("/get_songs success");
+          console.log("/get_songs success");
           console.log("Authorization URL opened");
           displayServerResponse(
             `Songs Extracted and ${responseData.message}`,
