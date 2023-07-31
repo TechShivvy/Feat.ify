@@ -3,6 +3,7 @@ Flask==2.3.2
 Flask_Cors==4.0.0
 gevent==23.7.0
 gunicorn==21.2.0
+lxml==4.9.3
 pandas==2.0.3
 pylast==5.2.0
 python-dotenv==1.0.0
