@@ -193,42 +193,36 @@ async function getTracks() {
     const response = await fetch("/get_tracks");
     console.log("Response received from /get_tracks:", response);
     clearInterval(messageInterval);
+    clearInterval(dotsInterval);
     if (response.ok) {
       console.log("Response is OK");
       const responseData = await response.json();
       if (responseData.status === "ok") {
         overlay.textContent = "Creating playlist";
         setTimeout(function() {
-          clearInterval(dotsInterval);
           overlay.textContent = responseData.message;
           addPlaylistIframe(responseData.playlist_id, "352");
         }, 10000);
       }else if (responseData.status === "partial") {
         overlay.textContent = "Creating playlist";
         setTimeout(function() {
-          clearInterval(dotsInterval);
           overlay.textContent = responseData.message;
           addErrorElement("Some tracks failed to add.");
           addPlaylistIframe(responseData.playlist_id, "352");
         }, 10000);
       } else if (responseData.status === "error") {
-        clearInterval(dotsInterval);
         overlay.textContent = responseData.message;
         addErrorElement(responseData.message);
       } else {
-        clearInterval(dotsInterval);
         overlay.textContent = "Unexpected response from the server.";
         addErrorElement("Unexpected response from the server.");
       }
     } else {
-      clearInterval(dotsInterval);
       console.error("Request failed:", response.status);
-
       overlay.textContent = "Request failed: " + response.status;
       addErrorElement("Request failed: " + response.status);
     }
   } catch (error) {
-    clearInterval(dotsInterval);
     console.error("Error occurred:", error);
 
     overlay.textContent = "Error occurred: " + error;
@@ -240,7 +234,6 @@ async function getTracks() {
     // Remove the overlay after a short delay
     setTimeout(() => {
       overlay.remove();
-      clearInterval(dotsInterval);
       disableDiv.remove();
       enableScroll();
     }, 2000);

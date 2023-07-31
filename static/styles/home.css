@@ -57,8 +57,8 @@ h2{
 }
 
 table {
-  margin-left: 10%;
-  margin-right: 10%;
+  
+  width:100%;
 }
 
 td {
@@ -414,3 +414,27 @@ svg path,
 svg rect {
   fill: #ffffff;
 }
+
+@media (max-width: 768px) {
+  /* Styles to apply when screen width is 768px or smaller (e.g., mobile devices) */
+  .table-container {
+    overflow-x: hidden; /* Remove horizontal scroll for small screens */
+  }
+
+  table {
+    display: block; /* Make the table a block-level element */
+    width: auto; /* Reset the table width */
+
+    /* Add any other styles for the table on small screens */
+  }
+
+  table th,
+  table td {
+    /* Add styles to make table cells stack on top of each other */
+    display: block;
+    width: 100%;
+    padding: 5% 5%;
+    /* Add any other styles for table cells on small screens */
+  }
+}
+
