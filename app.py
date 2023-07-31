@@ -22,6 +22,7 @@ from flask import (
     url_for,
 )
 from flask_cors import CORS, cross_origin
+from gevent.pywsgi import WSGIServer
 import pylast
 import logging
 import smtplib
@@ -539,5 +540,11 @@ def handle_lastfm_error(e):
     return jsonify({"status": "error", "error_message": str(e)}), 500
 
 
-if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0")
+# if __name__ == "__main__":
+#     #Development
+#     app.run(debug=True, host="0.0.0.0")
+#     #Production
+#     # from waitress import serve
+#     # serve(app, host="0.0.0.0", port=8080)
+#     http_server = WSGIServer(app)
+#     http_server.serve_forever()
