@@ -1,0 +1,416 @@
+/* For normal font */
+@font-face {
+  font-family: 'CustomFont';
+  font-weight: normal;
+  src: url('/static/fonts/CircularStd-Book.woff2') format('woff2'),
+       url('/static/fonts/CircularStd-Book.woff') format('woff');
+}
+
+/* For bold font */
+@font-face {
+  font-family: 'CustomFont';
+  font-weight: bold;
+  src: url('/static/fonts/CircularStd-Black.woff2') format('woff2'),
+       url('/static/fonts/CircularStd-Black.woff') format('woff');
+}
+
+
+
+body {
+  background-color: #f9f9f9;
+  font-family: 'CustomFont', sans-serif !important;
+}
+
+h1{
+  font-family: 'CustomFont',sans-serif !important;
+}
+
+h2{
+  font-family: 'CustomFont',sans-serif !important;
+}
+.container {
+  padding: 30px;
+  overflow: hidden; /* Prevent content from overflowing */
+  word-wrap: break-word; /* Allow words to wrap onto the next line */
+  white-space: normal;
+}
+
+.top-section {
+  background-color: #616f39; /* Yellow color for the top section */
+  text-align: center;
+  padding-top: 100px;
+  padding-bottom: 50px;
+  width:100%;
+}
+
+.greeting {
+  color: #a7d129;
+}
+
+.middle-section {
+  background-color: #a7d129; /* Blue color for the middle section */
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  color: #616f39;
+  padding: 50px 50px;
+}
+
+table {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+td {
+  width: 50%;
+  padding: 10px;
+}
+
+.bottom-section {
+  background-color: #f8eeb4; /* Pink color for the bottom section */
+  text-align: center;
+  color: #765827;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom-section h2 {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 10px;
+  padding-top: 5%;
+  overflow: hidden;
+}
+
+.bottom-section h3 {
+  margin-bottom: 60px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Add top margin to the button */
+}
+
+h1 {
+  text-align: center;
+  font-size: 50px;
+  color: #333;
+  /* animation: fade-in 2s; */
+}
+.form-control {
+  width: 100%;
+  height: 50px;
+  font-size: 18px;
+  background-color: #C8AE7D !important;
+  color: #F2EAD3 !important;
+  border: 2px solid transparent !important;/* Remove the border initially */
+  border-radius: 15px !important;
+  padding: 10px;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+}
+.form-control::placeholder {
+  /* Placeholder text style */
+  color: #F2EAD3 !important;
+}
+
+.form-control:focus {
+  /* Style on focus */
+  outline: none;
+  border: 5px;
+  border-color: #765827 !important;
+  box-shadow: none !important;
+}
+#searchResults {
+  opacity: 1;
+  border-color: #f8eeb4 !important;
+  background-color: #765827 !important;
+}
+
+/* ... (previous styles) ... */
+
+/* Waving hand animation */
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(14deg);
+  }
+  20% {
+    transform: rotate(-8deg);
+  }
+  30% {
+    transform: rotate(14deg);
+  }
+  40% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+
+  60% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.waving-hand {
+  width: 100px;
+  height: 100px;
+  animation: wave 2s infinite;
+  display: none;
+  transform: translate(
+    -50%,
+    -50%
+  ); /* Center the hand within the top container */
+  transform-origin: 70% 70%;
+}
+
+/* Styles for the carousel container */
+.carousel-container {
+  overflow: hidden; /* Hide the overflowing content */
+  padding-bottom: 20px;
+  /* Center the carousel horizontally */
+}
+
+.carousel-inner {
+  /* Use flexbox to center the icons horizontally */
+  justify-content: center; /* Center the icons horizontally */
+  display: none; /*Change this to flex *//*ok*/
+  margin: 0 auto;
+  padding-bottom: 50px;
+  width: 110px !important;
+}
+/* Styles for the carousel icons */
+.carousel-inner img {
+  display: inline-block;
+  margin: 0 5px; /* Add some space between the icons */
+  width: 100px; /* Adjust the width of the icons */
+  height: 100px; /* Adjust the height of the icons */
+}
+
+/* ... (previous styles) ... */
+
+/*
+#searchResults {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  z-index: 1;
+} */
+#searchResults {
+  position: relative; /* Change from 'absolute' to 'relative' */
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  /* overflow-y: auto; */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  z-index: 1;
+}
+
+.list-group {
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  border-radius: 5px;
+  box-shadow: none;
+  /* animation: slide-up 1s; */
+}
+.list-group-item {
+  background-color: #fff;
+  color: #333;
+  font-size: 20px;
+  /* animation: slide-up 1s; */
+}
+.list-group-item:hover {
+  background-color: #eee;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-down {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1db954;
+  /* background-color: rgba(0, 0, 0, 0.8); */
+  color: white;
+  font-size: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  /* Add new styles */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* background-color: #1db954; */
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  /* Add new styles */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.disable-scroll {
+  overflow: hidden;
+}
+#playlistContainer {
+  position: relative;
+  width: 90%;
+  max-width: 100%;
+  margin: 20px auto;
+  border-radius: 12px;
+  overflow: hidden;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); */
+}
+
+.menu-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background-color: #000; /* Black background */
+  color: #fff; /* White text color */
+  display: none;
+  /* visibility: hidden; */
+  align-items: center;
+  /* text-align: center; */
+  justify-content: center;
+  z-index: 9998;
+  /* transform: translateY(-100%);  */
+  /* transition: transform 0.5s;  */
+}
+
+.menu-title {
+  position: absolute;
+  font-size: 24px;
+  font-weight: bold;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); /* Center the menu title */
+}
+
+#proceed {
+  font-size: 24px;
+  background-color: #765827; /* Spotify green background */
+  color: #fff; /* White text color */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#proceed:hover {
+  background-color: #65451f; /* Darker green on hover */
+}
+
+/* Add custom styles for the playlist iframe */
+#playlistIframe {
+  display: block;
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 100%;
+  height: 240px; /* Adjust the height as needed */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+#serverResponse {
+  font-size: 18px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#serverResponse.ok {
+  color: #1db954;
+}
+
+#serverResponse.error {
+  color: red;
+}
+
+.loader {
+  display: flex; /* Use flexbox to center the rectangles horizontally */
+  justify-content: center; /* Center the rectangles horizontally */
+}
+svg path,
+svg rect {
+  fill: #ffffff;
+}

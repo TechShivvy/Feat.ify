@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ url_for('static',filename='images/favicon.ico') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static',filename='styles/index.css') }}"
+    />
+    <title>Bored, are ya? Give this a try</title>
+  </head>
+  <body>
+    <!-- Loading screen -->
+    <div class="loading-container" id="loadingContainer">
+      <div class="loading-text">Feat.ify</div>
+    </div>
+
+    <!-- Main content -->
+    <div class="main-container" id="mainContainer">
+      <div class="try-container">
+        Bored, are ya?!...<br />Give this a
+        <span
+          class="try-button"
+          onmouseover="addTryBox()"
+          onmouseout="removeTryBox()"
+          onclick="fadeAndNavigate()"
+        >
+          <span class="blink">try</span>
+          <div class="try-box"></div>
+        </span>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='scripts/index.js') }}"></script>
+  </body>
+</html>

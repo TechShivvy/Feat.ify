@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ url_for('static',filename='images/favicon.ico') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static',filename='styles/form.css') }}"
+    />
+    <title>Registration Form</title>
+    <style></style>
+  </head>
+  <body>
+    <input class="c-checkbox" type="checkbox" id="start" />
+    <input class="c-checkbox" type="checkbox" id="progress2" />
+    <input class="c-checkbox" type="checkbox" id="progress3" />
+    <input class="c-checkbox" type="checkbox" id="finish" />
+    <div class="c-form__progress"></div>
+
+    <div class="c-formContainer">
+      <!-- <div class="c-welcome">Welcome aboard!</div> -->
+      <div class="c-welcome">
+        <p class="large-text">Welcome aboard!</p>
+        <p class="small-text">
+          (Please wait until you receive a confirmation email.)
+        </p>
+      </div>
+      <form class="c-form" action="/register" id="registrationForm">
+        <div class="c-form__group">
+          <label class="c-form__label" for="username">
+            <input
+              type="text"
+              id="username"
+              class="c-form__input"
+              placeholder=" "
+              pattern="[^\s]+"
+              required
+            />
+
+            <label class="c-form__next" for="progress2" role="button">
+              <span class="c-form__nextIcon"></span>
+            </label>
+
+            <span class="c-form__groupLabel">Create your username.</span>
+            <b class="c-form__border"></b>
+          </label>
+        </div>
+
+        <div class="c-form__group">
+          <label class="c-form__label" for="femail">
+            <!-- <input
+              type="email"
+              id="femail"
+              class="c-form__input"
+              placeholder=" "
+              pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+              required
+            /> -->
+            <input
+              type="email"
+              id="femail"
+              class="c-form__input"
+              placeholder=" "
+              pattern="([A-Za-z0-9][._]?)+[A-Za-z0-9]@[A-Za-z0-9]+(\.?[A-Za-z0-9]){2}\.(com?|net|org)+(\.[A-Za-z0-9]{2,4})?"
+              required
+            />
+
+            <label class="c-form__next" for="progress3" role="button">
+              <span class="c-form__nextIcon"></span>
+            </label>
+
+            <span class="c-form__groupLabel">What's your email?</span>
+            <b class="c-form__border"></b>
+          </label>
+        </div>
+
+        <div class="c-form__group">
+          <label class="c-form__label" for="fage">
+            <input
+              type="number"
+              id="fage"
+              class="c-form__input"
+              placeholder=" "
+              required
+            />
+
+            <!-- <label
+              class="c-form__next"
+              for="finish"
+              role="button"
+              onclick="submitFormWithDelay()"
+            >
+              <span class="c-form__nextIcon"></span>
+            </label> -->
+            <label
+              class="c-form__next"
+              for="finish"
+              role="button"
+              id="submitButton"
+            >
+              <span class="c-form__nextIcon"></span>
+            </label>
+
+            <span class="c-form__groupLabel">Enter your age.</span>
+            <b class="c-form__border"></b>
+          </label>
+        </div>
+
+        <label class="c-form__toggle" for="start">Register</label>
+      </form>
+    </div>
+    <div style="text-align: center; margin-top: 20px">
+      <p id="skipText" style="font-size: 20px; color: white">
+        Already registered?
+      </p>
+      <button
+        id="skipButton"
+        style="
+          font-size: 18px;
+          padding: 10px 20px;
+          background-color: #fff;
+          color: #1db954;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        "
+        onclick="skipStep()"
+      >
+        Skip this step
+      </button>
+    </div>
+    <script src="{{ url_for('static', filename='scripts/form.js') }}"></script>
+  </body>
+</html>
