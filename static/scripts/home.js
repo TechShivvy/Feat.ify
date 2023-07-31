@@ -198,13 +198,13 @@ async function getTracks() {
       console.log("Response is OK");
       const responseData = await response.json();
       if (responseData.status === "ok") {
-        overlay.textContent = "Creating playlist";
+        overlay.textContent = "Creating playlist, pls wait...";
         setTimeout(function() {
           overlay.textContent = responseData.message;
           addPlaylistIframe(responseData.playlist_id, "352");
         }, 10000);
       }else if (responseData.status === "partial") {
-        overlay.textContent = "Creating playlist";
+        overlay.textContent = "Creating playlist, pls wait...";
         setTimeout(function() {
           overlay.textContent = responseData.message;
           addErrorElement("Some tracks failed to add.");
@@ -236,7 +236,7 @@ async function getTracks() {
       overlay.remove();
       disableDiv.remove();
       enableScroll();
-    }, 2000);
+    }, 10000);
   }
 }
 function addErrorElement(message) {
