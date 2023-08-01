@@ -100,3 +100,10 @@ function skipStep() {
     window.location.href = "home"; // Replace 'index.html' with the path to your desired HTML file
   }, 1000);
 }
+
+window.addEventListener("pageshow", function (event) {
+  // Clear the cache on page show
+  if (event.persisted) {
+    window.location.reload();
+  }
+});
