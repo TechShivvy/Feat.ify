@@ -449,7 +449,10 @@ def get_tracks():
     artist_name = name
     songs_data = get_songs(artist_name)
     if songs_data:
-        sp = spotipy.Spotify(auth=session.get("token_info").get("access_token"))
+        try:
+            sp = spotipy.Spotify(auth=session.get("token_info").get("access_token"))     
+        except spotipy.SpotifyException as e:
+            return jsonify({"status": "error", "message": "Invalid Spotify client.", "error": str(e)}), 500
         track_uris = get_tracks_from_spotify(songs_data, artist_name, sp)
         if not track_uris:
             return jsonify(
