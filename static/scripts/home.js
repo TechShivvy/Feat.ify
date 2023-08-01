@@ -402,9 +402,9 @@ function enableScroll() {
   document.body.classList.remove("disable-scroll");
 }
 
-function hardRefresh() {
-  window.location.reload(true); // Pass true as a parameter to force a hard refresh
-}
+// function hardRefresh() {
+//   window.location.reload(true); // Pass true as a parameter to force a hard refresh
+// }
 
-// Attach the event handler to the window.onunload event
-window.onunload = hardRefresh;
+// // Attach the event handler to the window.onunload event
+// window.onunload = hardRefresh;
