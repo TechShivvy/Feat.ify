@@ -181,7 +181,7 @@ def create_playlist(track_uris, artistName, username, sp, playlist_id=None):
         print(
             f"Playlist created: {sp.playlist(playlist_id)['external_urls']['spotify']}"
         )
-        #print("Tracks added to playlist with response:", add_tracks_response) #dev
+        # print("Tracks added to playlist with response:", add_tracks_response) #dev
         return playlist_id, []
     except Exception as e:
         print("Error creating or adding tracks to the playlist:", str(e))
@@ -255,8 +255,8 @@ def get_tracks_from_spotify(songs, artistName, sp):
                     break
             else:
                 pass
-                #print(f"No results found for '{song[0]}'") #dev
-            #print() #dev
+                # print(f"No results found for '{song[0]}'") #dev
+            # print() #dev
         return track_uris
     except Exception as e:
         print("Error getting tracks from Spotify:", str(e))
@@ -314,12 +314,12 @@ def register():
             subject = f"{username}'s Registration Form"
             body = f"Username: {username}\nEmail: {email}\nAge: {age}"
             if send_email(subject, body):
-                #print("Form details sent to email!")   #dev
+                # print("Form details sent to email!")   #dev
                 return jsonify(
                     {"status": "success", "message": "Mail sent successfully."}
                 )
             else:
-                #print("Failed to send email!") #dev
+                # print("Failed to send email!") #dev
                 return jsonify({"status": "error", "message": "Failed to send email."})
         except Exception as e:
             print(f"Error processing the request: {e}")
@@ -369,7 +369,7 @@ def get_songs_route():
         name = artist_name
         sp_oauth = create_spotify_oauth()
         auth_url = sp_oauth.get_authorize_url()
-        #print(auth_url) #dev
+        # print(auth_url) #dev
         # return redirect(auth_url)
         return jsonify(
             {
@@ -449,20 +449,24 @@ def get_tracks():
     artist_name = name
     songs_data = get_songs(artist_name)
     if songs_data:
-        try:
-            sp = spotipy.Spotify(auth=session.get("token_info").get("access_token"))     
-        except spotipy.SpotifyException as e:
-            return jsonify({"status": "error", "message": "Invalid Spotify client.", "error": str(e)}), 500
+        sp = spotipy.Spotify(auth=session.get("token_info").get("access_token"))
+        user_info = sp.me()
+        user_id = user_info["id"]
+        if not user_info and not user_id:
+            return jsonify(
+                {
+                    "status": "error",
+                    "message": "You are not authorised yet to use this app.",
+                }
+            )
         track_uris = get_tracks_from_spotify(songs_data, artist_name, sp)
         if not track_uris:
             return jsonify(
                 {"status": "error", "message": "No tracks found for the playlist."}
             )
 
-        user_info = sp.me()
-        user_id = user_info["id"]
-        #print("Your Spotify username is:", user_id) #dev
-        #print("Access token obtained successfully!") #dev
+        # print("Your Spotify username is:", user_id) #dev
+        # print("Access token obtained successfully!") #dev
 
         max_elements_per_list = 100
         track_uri_chunks = split_into_nested_lists(track_uris, max_elements_per_list)
@@ -507,12 +511,16 @@ def get_tracks():
                 )
         else:
             return jsonify(
-                {"status": "error", "message": "Failed to create or update the playlist."}
+                {
+                    "status": "error",
+                    "message": "Failed to create or update the playlist.",
+                }
             )
     else:
         return jsonify(
-                {"status": "error", "message": "No features found for the artist."}
-            )
+            {"status": "error", "message": "No features found for the artist."}
+        )
+
 
 @app.route("/search", methods=["GET"])
 # @cache.cached(timeout=3600)
@@ -544,7 +552,7 @@ def handle_lastfm_error(e):
 
 
 if __name__ == "__main__":
-    #Development
+    # Development
     app.run(debug=True, host="0.0.0.0")
     # #Production
     # # from waitress import serve
