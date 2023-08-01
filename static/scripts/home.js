@@ -6,6 +6,7 @@ const serverResponseElement = document.getElementById("serverResponse");
 const playlistContainer = document.getElementById("playlistContainer");
 const proceedButton = document.getElementById("proceed");
 
+sessionStorage.setItem("currentPage", "home");
 //everything starts to slide down parallely with sligt delay
 // function showSections() {
 //   // Use jQuery's when() to start all animations simultaneously with different delays
@@ -389,3 +390,10 @@ function disableScroll() {
 function enableScroll() {
   document.body.classList.remove("disable-scroll");
 }
+
+function hardRefresh() {
+  window.location.reload(true); // Pass true as a parameter to force a hard refresh
+}
+
+// Attach the event handler to the window.onunload event
+window.onunload = hardRefresh;

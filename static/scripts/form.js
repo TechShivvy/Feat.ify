@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  sessionStorage.setItem("currentPage", "form");
   document
     .getElementById("submitButton")
     .addEventListener("click", function (event) {
@@ -97,13 +98,37 @@ function skipStep() {
     formContainer.style.display = "none";
     skipText.style.display = "none";
     skipButton.style.display = "none";
+    // sessionStorage.setItem("leaveFormPage", "true");
     window.location.href = "home"; // Replace 'index.html' with the path to your desired HTML file
   }, 1000);
 }
 
-window.addEventListener("pageshow", function (event) {
-  // Clear the cache on page show
-  if (event.persisted) {
+function reloadPageOnBack() {
+  // Check if the current page identifier in sessionStorage matches 'form'
+  const currentPage = sessionStorage.getItem("currentPage");
+  if (currentPage !== "form") {
+    // If it doesn't match, reload the page to start fresh
+    sessionStorage.removeItem("currentPage");
     window.location.reload();
   }
-});
+}
+
+// Attach the event handler to the onpageshow event
+window.onpageshow = reloadPageOnBack;
+
+// function reloadPageOnBack() {
+//   if (sessionStorage.getItem("leaveFormPage") === "true") {
+//     sessionStorage.removeItem("leaveFormPage");
+//     window.location.href=("form"); // Redirect to the form page to start fresh
+//   }
+// }
+
+// // Attach the event handler to the onpageshow event
+// window.onpageshow = reloadPageOnBack;
+
+// window.addEventListener("pageshow", function (event) {
+//   // Clear the cache on page show
+//   if (event.persisted) {
+//     window.location.reload();
+//   }
+// });
