@@ -85,12 +85,22 @@ function displayServerResponse(message, status) {
   serverResponseElement.classList.add(status);
 }
 
+document.addEventListener("click", function (event) {
+  const clickedTarget = event.target;
+  if (
+    clickedTarget !== searchInput &&
+    !searchResultsElement.contains(clickedTarget)
+  )
+    searchResultsElement.innerHTML = "";
+});
+
 searchForm.addEventListener("submit", async function (event) {
   event.preventDefault();
   proceedButton.disabled = true;
   const searchInputValue = searchInput.value;
   if (searchInputValue === "") {
     errorMessageElement.textContent = "Please enter an artist name.";
+    searchResultsElement.innerHTML = "";
     return;
   } else {
     errorMessageElement.textContent = "";
