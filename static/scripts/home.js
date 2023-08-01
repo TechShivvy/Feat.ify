@@ -4,6 +4,7 @@ const errorMessageElement = document.getElementById("errorMessage");
 const searchResultsElement = document.getElementById("searchResults");
 const serverResponseElement = document.getElementById("serverResponse");
 const playlistContainer = document.getElementById("playlistContainer");
+const proceedButton = document.getElementById("proceed");
 
 //everything starts to slide down parallely with sligt delay
 // function showSections() {
@@ -23,17 +24,18 @@ const playlistContainer = document.getElementById("playlistContainer");
 function showSections() {
   $("#menuBar").slideDown(500, function () {
     $(".top-section").slideDown(500, function () {
-      $(".waving-hand").fadeIn(500,()=>{
-      $(".middle-section").slideDown(500, function () {
-        $(".carousel-inner").fadeIn(500,()=>{
-        $(".bottom-section").slideDown(500, function () {
-          // $(".container").fadeIn(500);
+      $(".waving-hand").fadeIn(500, () => {
+        $(".middle-section").slideDown(500, function () {
+          $(".carousel-inner").fadeIn(500, () => {
+            $(".bottom-section").slideDown(500, function () {
+              $("footer").css("display", "block");
+              // $(".container").fadeIn(500);
+            });
+          });
         });
       });
     });
   });
-});
-});
 }
 
 // function showMenuBar() {
@@ -71,13 +73,19 @@ $(document).ready(function () {
 });
 
 function displayServerResponse(message, status) {
-  serverResponseElement.textContent = message;
-  serverResponseElement.classList.remove("ok", "error");
+  if (!message.endsWith("...") && message.endsWith(".")) {
+    message = message.slice(0, -1);
+  }
+  serverResponseElement.innerHTML = message + ", ";
+  const formLink = `<a href="https://forms.gle/WMYer2dQPQE7MKRp6" target="_blank"> Help Us Improve</a>`;
+  serverResponseElement.insertAdjacentHTML("beforeend", formLink);
+  serverResponseElement.classList.remove("ok", "error", "partial");
   serverResponseElement.classList.add(status);
 }
 
 searchForm.addEventListener("submit", async function (event) {
   event.preventDefault();
+  proceedButton.disabled = true;
   const searchInputValue = searchInput.value;
   if (searchInputValue === "") {
     errorMessageElement.textContent = "Please enter an artist name.";
@@ -86,7 +94,7 @@ searchForm.addEventListener("submit", async function (event) {
     errorMessageElement.textContent = "";
     const data = { name: searchInputValue };
     const jsonData = JSON.stringify(data);
-
+    displayServerResponse("Cooking...", "ok");
     try {
       const response = await fetch("/get_songs", {
         method: "POST",
@@ -103,10 +111,7 @@ searchForm.addEventListener("submit", async function (event) {
           // Open the authorization URL in a new window
           console.log("/get_songs success");
           console.log("Authorization URL opened");
-          displayServerResponse(
-            `Songs Extracted and ${responseData.message}`,
-            "ok"
-          );
+          displayServerResponse(`${responseData.message}`, "ok");
           window.open(responseData.auth_url, "_blank");
         } else if (responseData.status === "error") {
           console.error("/get_songs failed:", responseData.error_message);
@@ -159,6 +164,7 @@ async function getTracks() {
   document.body.appendChild(overlay);
 
   const messages = [
+    "",
     "Fetching tracks",
     `${searchInput.value} has a lot of features`,
     `Taking a bit longer to process ${searchInput.value}`,
@@ -188,6 +194,8 @@ async function getTracks() {
   // Call displayDots every 1 second
   const dotsInterval = setInterval(displayDots, 1000);
   disableScroll();
+
+  let responseData; // Declare the variable here
   try {
     console.log("Sending request to /get_tracks...");
     const response = await fetch("/get_tracks");
@@ -196,50 +204,64 @@ async function getTracks() {
     clearInterval(dotsInterval);
     if (response.ok) {
       console.log("Response is OK");
-      const responseData = await response.json();
+      responseData = await response.json();
       if (responseData.status === "ok") {
         overlay.textContent = "Creating playlist, pls wait...";
-        setTimeout(function() {
+        setTimeout(function () {
           overlay.textContent = responseData.message;
-          addPlaylistIframe(responseData.playlist_id, "352");
+          displayServerResponse(`${responseData.message}`, "ok");
+          const playlistIframe = addPlaylistIframe(
+            responseData.playlist_id,
+            "352"
+          );
+          // playlistIframe.style.display = "block"; // Set the display property to 'block' before fading in
+          // $(playlistIframe).fadeIn(500); // Fade in the playlistIframe
         }, 10000);
-      }else if (responseData.status === "partial") {
+      } else if (responseData.status === "partial") {
         overlay.textContent = "Creating playlist, pls wait...";
-        setTimeout(function() {
+        setTimeout(function () {
           overlay.textContent = responseData.message;
-          addErrorElement("Some tracks failed to add.");
-          addPlaylistIframe(responseData.playlist_id, "352");
+          displayServerResponse(`${responseData.message}`, "partial");
+          // addErrorElement(overlay, "Some tracks failed to add.");
+          const playlistIframe = addPlaylistIframe(
+            responseData.playlist_id,
+            "352"
+          );
+          // playlistIframe.style.display = "block"; // Set the display property to 'block' before fading in
+          // $(playlistIframe).fadeIn(500); // Fade in the playlistIframe
         }, 10000);
       } else if (responseData.status === "error") {
+        console.log(responseData);
         overlay.textContent = responseData.message;
-        addErrorElement(responseData.message);
+        displayServerResponse(`${responseData.message}`, "error");
+        // addErrorElement(overlay, responseData.message);
       } else {
         overlay.textContent = "Unexpected response from the server.";
-        addErrorElement("Unexpected response from the server.");
+        displayServerResponse("Unexpected response from the server.", "error");
+        // addErrorElement(overlay, "Unexpected response from the server.");
       }
     } else {
       console.error("Request failed:", response.status);
       overlay.textContent = "Request failed: " + response.status;
-      addErrorElement("Request failed: " + response.status);
+      displayServerResponse("Request failed: " + response.status, "error");
+      // addErrorElement(overlay, "Request failed: " + response.status);
     }
   } catch (error) {
     console.error("Error occurred:", error);
-
-    overlay.textContent = "Error occurred: " + error;
-    const errorElement = document.createElement("div");
-    errorElement.classList.add("text-danger");
-    errorElement.innerHTML = overlay.textContent;
-    playlistContainer.appendChild(errorElement);
+    displayServerResponse("Error occurred: " + error, "error");
+    // addErrorElement(overlay,"Error occurred: " + error)
   } finally {
     // Remove the overlay after a short delay
+    const delayTime = responseData?.delay_time || 2000;
     setTimeout(() => {
       overlay.remove();
       disableDiv.remove();
       enableScroll();
-    }, 10000);
+      proceedButton.disabled = false;
+    }, delayTime);
   }
 }
-function addErrorElement(message) {
+function addErrorElement(overlay, message) {
   overlay.textContent = message;
   const errorElement = document.createElement("div");
   errorElement.classList.add("text-danger");
@@ -258,7 +280,10 @@ function addPlaylistIframe(playlistId, height) {
     "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture";
   playlistIframe.loading = "lazy";
   playlistIframe.style.borderRadius = "12px";
+  playlistIframe.classList.add("slide-left"); // Add the 'slide-in' class
+  // playlistIframe.style.display = "none"; // Set initial display property to 'none'
   playlistContainer.appendChild(playlistIframe);
+  return playlistIframe;
 }
 
 function fetchArtists(query) {

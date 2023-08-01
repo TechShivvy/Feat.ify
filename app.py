@@ -365,27 +365,19 @@ def get_songs_route():
     try:
         data = request.get_json()
         artist_name = data["name"]
-        global name, songs_data
+        global name
         name = artist_name
-        songs_data = get_songs(artist_name)
-
-        if songs_data:
-            sp_oauth = create_spotify_oauth()
-            auth_url = sp_oauth.get_authorize_url()
-            #print(auth_url) #dev
-            # return redirect(auth_url)
-            return jsonify(
-                {
-                    "status": "ok",
-                    "message": "Authenticatin URL received",
-                    "auth_url": auth_url,
-                }
-            )
-        else:
-            return jsonify(
-                {"status": "error", "message": "No songs data found for the artist."}
-            )
-
+        sp_oauth = create_spotify_oauth()
+        auth_url = sp_oauth.get_authorize_url()
+        #print(auth_url) #dev
+        # return redirect(auth_url)
+        return jsonify(
+            {
+                "status": "ok",
+                "message": "Authenticatin URL received.",
+                "auth_url": auth_url,
+            }
+        )
     except Exception as e:
         app.logger.error(f"Error in /get_songs route: {str(e)}")
         return jsonify({"status": "error", "error_message": str(e)}), 500
@@ -455,62 +447,69 @@ def get_tracks():
         return redirect("/")
 
     artist_name = name
-    sp = spotipy.Spotify(auth=session.get("token_info").get("access_token"))
-    track_uris = get_tracks_from_spotify(songs_data, artist_name, sp)
-    if not track_uris:
-        return jsonify(
-            {"status": "error", "message": "No tracks found for the playlist."}
-        )
-
-    user_info = sp.me()
-    user_id = user_info["id"]
-    #print("Your Spotify username is:", user_id) #dev
-    #print("Access token obtained successfully!") #dev
-
-    max_elements_per_list = 100
-    track_uri_chunks = split_into_nested_lists(track_uris, max_elements_per_list)
-
-    created_playlist_id = None
-    failed_tracks_uris = []
-
-    for track_uris_chunk in track_uri_chunks:
-        if not created_playlist_id:
-            created_playlist_id, failed_tracks_uris = create_playlist(
-                track_uris_chunk, artist_name, user_id, sp
-            )
-        else:
-            _, new_failed_tracks_uris = create_playlist(
-                track_uris_chunk,
-                artist_name,
-                user_id,
-                sp,
-                playlist_id=created_playlist_id,
-            )
-            failed_tracks_uris.extend(new_failed_tracks_uris)
-
-    if created_playlist_id:
-        if failed_tracks_uris:
+    songs_data = get_songs(artist_name)
+    if songs_data:
+        sp = spotipy.Spotify(auth=session.get("token_info").get("access_token"))
+        track_uris = get_tracks_from_spotify(songs_data, artist_name, sp)
+        if not track_uris:
             return jsonify(
-                {
-                    "status": "partial",
-                    "message": "Playlist created with some failed tracks.",
-                    "playlist_id": created_playlist_id,
-                    "failed_tracks_uris": failed_tracks_uris,
-                }
+                {"status": "error", "message": "No tracks found for the playlist."}
             )
+
+        user_info = sp.me()
+        user_id = user_info["id"]
+        #print("Your Spotify username is:", user_id) #dev
+        #print("Access token obtained successfully!") #dev
+
+        max_elements_per_list = 100
+        track_uri_chunks = split_into_nested_lists(track_uris, max_elements_per_list)
+
+        created_playlist_id = None
+        failed_tracks_uris = []
+
+        for track_uris_chunk in track_uri_chunks:
+            if not created_playlist_id:
+                created_playlist_id, failed_tracks_uris = create_playlist(
+                    track_uris_chunk, artist_name, user_id, sp
+                )
+            else:
+                _, new_failed_tracks_uris = create_playlist(
+                    track_uris_chunk,
+                    artist_name,
+                    user_id,
+                    sp,
+                    playlist_id=created_playlist_id,
+                )
+                failed_tracks_uris.extend(new_failed_tracks_uris)
+
+        if created_playlist_id:
+            if failed_tracks_uris:
+                return jsonify(
+                    {
+                        "status": "partial",
+                        "message": "Playlist created with some failed tracks.",
+                        "playlist_id": created_playlist_id,
+                        "failed_tracks_uris": failed_tracks_uris,
+                        "delay_time": 10000,
+                    }
+                )
+            else:
+                return jsonify(
+                    {
+                        "status": "ok",
+                        "message": "Playlist created successfully.",
+                        "playlist_id": created_playlist_id,
+                        "delay_time": 10000,
+                    }
+                )
         else:
             return jsonify(
-                {
-                    "status": "ok",
-                    "message": "Playlist created successfully.",
-                    "playlist_id": created_playlist_id,
-                }
+                {"status": "error", "message": "Failed to create or update the playlist."}
             )
     else:
         return jsonify(
-            {"status": "error", "message": "Failed to create or update the playlist."}
-        )
-
+                {"status": "error", "message": "No features found for the artist."}
+            )
 
 @app.route("/search", methods=["GET"])
 # @cache.cached(timeout=3600)
@@ -541,11 +540,11 @@ def handle_lastfm_error(e):
     return jsonify({"status": "error", "error_message": str(e)}), 500
 
 
-# if __name__ == "__main__":
-#     #Development
-#     app.run(debug=True, host="0.0.0.0")
-#     #Production
-#     # from waitress import serve
-#     # serve(app, host="0.0.0.0", port=8080)
-#     http_server = WSGIServer(app)
-#     http_server.serve_forever()
+if __name__ == "__main__":
+    #Development
+    app.run(debug=True, host="0.0.0.0")
+    # #Production
+    # # from waitress import serve
+    # # serve(app, host="0.0.0.0", port=8080)
+    # http_server = WSGIServer(app)
+    # http_server.serve_forever()

@@ -402,6 +402,10 @@ h1 {
   color: #1db954;
 }
 
+#serverResponse.partial {
+  color: orange;
+}
+
 #serverResponse.error {
   color: red;
 }
@@ -414,7 +418,18 @@ svg path,
 svg rect {
   fill: #ffffff;
 }
-
+.slide-left {
+  width: 100%;
+  animation: 3s slide-left ease;
+}
+@keyframes slide-left {
+  from {
+    margin-left: 100%;
+  }
+  to {
+    margin-left: 0%;
+  }
+}
 @media (max-width: 768px) {
   /* Styles to apply when screen width is 768px or smaller (e.g., mobile devices) */
   .table-container {

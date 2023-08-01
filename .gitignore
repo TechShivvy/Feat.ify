@@ -2,3 +2,8 @@
 
 .vscode
 
+#backup
+app-backup.py
+
+static/scripts/home-backup.js
+

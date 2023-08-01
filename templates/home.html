@@ -13,7 +13,7 @@
       type="text/css"
       href="{{ url_for('static',filename='styles/home.css') }}"
     />
-<!-- 
+    <!-- 
     <link
       rel="icon"
       type="image/x-icon"
@@ -101,108 +101,107 @@
     <div class="top-section">
       <div class="container">
         <div class="table-container">
-        <table>
-          <tr>
-            <td>
-              <img
-                class="waving-hand"
-                src="{{ url_for('static', filename='images/icons/wave.png') }}"
-              />
-              <!-- <img
+          <table>
+            <tr>
+              <td>
+                <img
+                  class="waving-hand"
+                  src="{{ url_for('static', filename='images/icons/wave.png') }}"
+                />
+                <!-- <img
               class="waving-hand"
               src="../static/images/icons/wave.png"
             /> -->
-            </td>
-            <td>
-              <h1 class="greeting">Hey there,</h1>
-              <h2 class="greeting">Fellow audiophile extraordinaire...</h2>
-            </td>
-          </tr>
-        </table>
-      </div>
+              </td>
+              <td>
+                <h1 class="greeting">Hey there,</h1>
+                <h2 class="greeting">Fellow audiophile extraordinaire...</h2>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
 
     <div class="middle-section">
       <div class="container">
         <div class="table-container">
-        
-        <table>
-          <tr>
-            <td>
-              <h2>
-                It seems you have stumbled across our wonderful web application
-                ...
-              </h2>
-              <h2>
-                Well, unleash your musical curiosity and embark on a symphonic
-                journey like no other!
-              </h2>
-            </td>
-            <td>
-              <div
-                id="iconCarousel"
-                class="carousel slide"
-                data-ride="carousel"
-                data-interval="3000"
-              >
-                <div class="carousel-inner" role="listbox">
-                  <div class="item active">
-                    <img
-                      src="{{ url_for('static', filename='images/icons/i1.png') }}"
-                      alt="Icon 1"
-                    />
+          <table>
+            <tr>
+              <td>
+                <h2>
+                  It seems you have stumbled across our wonderful web
+                  application ...
+                </h2>
+                <h2>
+                  Well, unleash your musical curiosity and embark on a symphonic
+                  journey like no other!
+                </h2>
+              </td>
+              <td>
+                <div
+                  id="iconCarousel"
+                  class="carousel slide"
+                  data-ride="carousel"
+                  data-interval="3000"
+                >
+                  <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                      <img
+                        src="{{ url_for('static', filename='images/icons/i1.png') }}"
+                        alt="Icon 1"
+                      />
+                    </div>
+                    <div class="item">
+                      <img
+                        src="{{ url_for('static', filename='images/icons/i2.png') }}"
+                        alt="Icon 2"
+                      />
+                    </div>
+                    <div class="item">
+                      <img
+                        src="{{ url_for('static', filename='images/icons/i3.png') }}"
+                        alt="Icon 3"
+                      />
+                    </div>
+                    <div class="item">
+                      <img
+                        src="{{ url_for('static', filename='images/icons/i4.png') }}"
+                        alt="Icon 4"
+                      />
+                    </div>
+                    <div class="item">
+                      <img
+                        src="{{ url_for('static', filename='images/icons/i5.png') }}"
+                        alt="Icon 5"
+                      />
+                    </div>
+                    <div class="item">
+                      <img
+                        src="{{ url_for('static', filename='images/icons/i6.png') }}"
+                        alt="Icon 6"
+                      />
+                    </div>
+                    <div class="item">
+                      <img
+                        src="{{ url_for('static', filename='images/icons/i7.png') }}"
+                        alt="Icon 7"
+                      />
+                    </div>
+                    <div class="item">
+                      <img
+                        src="{{ url_for('static', filename='images/icons/i8.png') }}"
+                        alt="Icon 8"
+                      />
+                    </div>
+                    <div class="item">
+                      <img
+                        src="{{ url_for('static', filename='images/icons/i9.png') }}"
+                        alt="Icon 9"
+                      />
+                    </div>
                   </div>
-                  <div class="item">
-                    <img
-                      src="{{ url_for('static', filename='images/icons/i2.png') }}"
-                      alt="Icon 2"
-                    />
-                  </div>
-                  <div class="item">
-                    <img
-                      src="{{ url_for('static', filename='images/icons/i3.png') }}"
-                      alt="Icon 3"
-                    />
-                  </div>
-                  <div class="item">
-                    <img
-                      src="{{ url_for('static', filename='images/icons/i4.png') }}"
-                      alt="Icon 4"
-                    />
-                  </div>
-                  <div class="item">
-                    <img
-                      src="{{ url_for('static', filename='images/icons/i5.png') }}"
-                      alt="Icon 5"
-                    />
-                  </div>
-                  <div class="item">
-                    <img
-                      src="{{ url_for('static', filename='images/icons/i6.png') }}"
-                      alt="Icon 6"
-                    />
-                  </div>
-                  <div class="item">
-                    <img
-                      src="{{ url_for('static', filename='images/icons/i7.png') }}"
-                      alt="Icon 7"
-                    />
-                  </div>
-                  <div class="item">
-                    <img
-                      src="{{ url_for('static', filename='images/icons/i8.png') }}"
-                      alt="Icon 8"
-                    />
-                  </div>
-                  <div class="item">
-                    <img
-                      src="{{ url_for('static', filename='images/icons/i9.png') }}"
-                      alt="Icon 9"
-                    />
-                  </div>
-                </div>
-                <!-- <div class="carousel-inner" role="listbox">
+                  <!-- <div class="carousel-inner" role="listbox">
                   <div class="item active">
                     <img src="../static/images/icons/i1.png" alt="Icon 1" />
                   </div>
@@ -231,11 +230,11 @@
                     <img src="../static/images/icons/i9.png" alt="Icon 9" />
                   </div>
                 </div>                 -->
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
 
@@ -278,6 +277,16 @@
         </div>
       </div>
     </div>
+
+    <footer class="text-center text-lg-start bg-light text-muted" style="display: none;">
+      <div
+        class="text-center p-4"
+        style="background-color: rgba(0, 0, 0, 0.05)"
+      >
+      <a class="text-reset fw-bold" href="https://github.com/TechShivvy/Feat.ify" target="_blank">Feat.ify</a> 
+      &copy; 2023 - All rights reserved | Created with ❤️ by Hitesh & Shivi
+    </footer>
+
     <!-- <script src="../static/scripts/script.js  "></script> -->
     <script src="{{ url_for('static', filename='scripts/home.js') }}"></script>
   </body>
