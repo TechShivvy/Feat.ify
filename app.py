@@ -449,16 +449,9 @@ def get_tracks():
     artist_name = name
     songs_data = get_songs(artist_name)
     if songs_data:
-        if not session.get("token_info").get("access_token"):
-            return jsonify(
-                    {
-                        "status": "error",
-                        "message": "You are not authorised yet to use this app.",
-                    }
-                )
         sp = spotipy.Spotify(auth=session.get("token_info").get("access_token"))
         user_info = sp.me()
-        user_id = user_info["id"]            
+        user_id = user_info["id"]
         track_uris = get_tracks_from_spotify(songs_data, artist_name, sp)
         if not track_uris:
             return jsonify(
