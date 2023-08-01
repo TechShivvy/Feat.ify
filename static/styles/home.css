@@ -14,7 +14,9 @@
        url('/static/fonts/CircularStd-Black.woff') format('woff');
 }
 
-
+html{
+  overflow-y: hidden;
+}
 
 body {
   background-color: #f9f9f9;

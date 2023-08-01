@@ -23,6 +23,7 @@ sessionStorage.setItem("currentPage", "home");
 
 //everything slides down after the prev
 function showSections() {
+  $("html").css("overflow-y", "visible");
   $("#menuBar").slideDown(500, function () {
     $(".top-section").slideDown(500, function () {
       $(".waving-hand").fadeIn(500, () => {
