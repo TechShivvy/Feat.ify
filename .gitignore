@@ -2,6 +2,8 @@
 
 .vscode
 
+confirmMail.py
+
 #backup
 app-backup.py
 
