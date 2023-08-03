@@ -435,9 +435,6 @@ svg rect {
 }
 
 footer {
-  display: block;
-  position: fixed;
-  bottom: 0;
   width: 100%;
   background-color: black;
   padding: 10px 0;

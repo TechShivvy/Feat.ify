@@ -77,10 +77,13 @@ async function submitFormWithDelay() {
 
 function fadeWelcome() {
   const welcomeMessage = document.querySelector(".c-welcome");
+  const skipfucks=document.querySelector(".SkipShit");
   welcomeMessage.classList.add("fadeOut");
+  skipfucks.classList.add("fadeOut");
   setTimeout(function () {
     // Hide the welcome message and skipWelcome elements after the delay
     welcomeMessage.style.display = "none";
+    skipfucks.style.display="none";
 
     // // Redirect to index.html after the animation is complete
     window.location.href = "home";
