@@ -32,27 +32,6 @@
     <div class="c-formContainer">
       <!-- <div class="c-welcome">Welcome aboard!</div> -->
       <div class="c-welcome">
-        <div style="text-align: center; margin-top: 20px">
-          <p id="skipText" style="font-size: 20px; color: white; z-index: 2;">
-            Already registered?
-          </p>
-          <button
-            id="skipButton"
-            style="
-              font-size: 18px;
-              padding: 10px 20px;
-              background-color: #fff;
-              color: #1db954;
-              z-index: 2;
-              border: none;
-              border-radius: 5px;
-              cursor: pointer;
-            "
-            onclick="skipStep()"
-          >
-            Skip this step
-          </button>
-        </div>
         <p class="large-text">Welcome aboard!</p>
         <p class="small-text">
           (Please wait until you receive a confirmation email :p)
@@ -142,7 +121,17 @@
         <label class="c-form__toggle" for="start">Register</label>
       </form>
     </div>
-    
+    <div class="SkipShit">
+      <p id="skipText">
+        Already registered?
+      </p>
+      <button
+        id="skipButton"
+        onclick="skipStep()"
+      >
+        Skip this step
+      </button>
+    </div>
     <script src="{{ url_for('static', filename='scripts/form.js') }}"></script>
   </body>
 </html>
