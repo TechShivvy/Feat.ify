@@ -445,7 +445,7 @@ body {
 .c-form__progress {
   position: fixed;
   left: 0;
-  min-height: 100vh;
+  min-height: 100%;
   width: 0;
   background-color: #199e48;
   transition: 0.3s;

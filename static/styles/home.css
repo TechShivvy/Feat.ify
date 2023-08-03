@@ -32,6 +32,7 @@ h2{
 }
 .container {
   padding: 30px;
+  
   overflow: hidden; /* Prevent content from overflowing */
   word-wrap: break-word; /* Allow words to wrap onto the next line */
   white-space: normal;
