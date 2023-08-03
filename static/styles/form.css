@@ -63,16 +63,6 @@ body {
   animation: fadeOut 2s ease;
 }
 
-body {
-  font-family: "Open Sans", sans-serif;
-  margin: 0;
-  height: 100vh;
-  display: grid;
-  place-items: center;
-  background-color: #1db954;
-  position: relative;
-  overflow: hidden;
-}
 
 .c-checkbox {
   display: none;
@@ -449,4 +439,16 @@ body {
   width: 0;
   background-color: #199e48;
   transition: 0.3s;
+  z-index: 1;
+}
+
+@media (max-width: 768px){
+  .large-text {
+    font-size: 20px;
+  }
+  
+  .small-text {
+    font-size: 10px; /* Change the font size to your desired value for the second line */
+  }
+  
 }
