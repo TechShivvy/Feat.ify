@@ -1,38 +1,38 @@
 /* For normal font */
 @font-face {
-  font-family: 'CustomFont';
+  font-family: "CustomFont";
   font-weight: normal;
-  src: url('/static/fonts/CircularStd-Book.woff2') format('woff2'),
-       url('/static/fonts/CircularStd-Book.woff') format('woff');
+  src: url("/static/fonts/CircularStd-Book.woff2") format("woff2"),
+    url("/static/fonts/CircularStd-Book.woff") format("woff");
 }
 
 /* For bold font */
 @font-face {
-  font-family: 'CustomFont';
+  font-family: "CustomFont";
   font-weight: bold;
-  src: url('/static/fonts/CircularStd-Black.woff2') format('woff2'),
-       url('/static/fonts/CircularStd-Black.woff') format('woff');
+  src: url("/static/fonts/CircularStd-Black.woff2") format("woff2"),
+    url("/static/fonts/CircularStd-Black.woff") format("woff");
 }
 
-html{
+html {
   overflow-y: hidden;
 }
 
 body {
   background-color: #f9f9f9;
-  font-family: 'CustomFont', sans-serif !important;
+  font-family: "CustomFont", sans-serif !important;
 }
 
-h1{
-  font-family: 'CustomFont',sans-serif !important;
+h1 {
+  font-family: "CustomFont", sans-serif !important;
 }
 
-h2{
-  font-family: 'CustomFont',sans-serif !important;
+h2 {
+  font-family: "CustomFont", sans-serif !important;
 }
 .container {
   padding: 30px;
-  
+
   overflow: hidden; /* Prevent content from overflowing */
   word-wrap: break-word; /* Allow words to wrap onto the next line */
   white-space: normal;
@@ -43,7 +43,7 @@ h2{
   text-align: center;
   padding-top: 100px;
   padding-bottom: 50px;
-  width:100%;
+  width: 100%;
 }
 
 .greeting {
@@ -60,8 +60,7 @@ h2{
 }
 
 table {
-  
-  width:100%;
+  width: 100%;
 }
 
 td {
@@ -106,16 +105,16 @@ h1 {
   width: 100%;
   height: 50px;
   font-size: 18px;
-  background-color: #C8AE7D !important;
-  color: #F2EAD3 !important;
-  border: 2px solid transparent !important;/* Remove the border initially */
+  background-color: #c8ae7d !important;
+  color: #f2ead3 !important;
+  border: 2px solid transparent !important; /* Remove the border initially */
   border-radius: 15px !important;
   padding: 10px;
   /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 }
 .form-control::placeholder {
   /* Placeholder text style */
-  color: #F2EAD3 !important;
+  color: #f2ead3 !important;
 }
 
 .form-control:focus {
@@ -185,7 +184,7 @@ h1 {
 .carousel-inner {
   /* Use flexbox to center the icons horizontally */
   justify-content: center; /* Center the icons horizontally */
-  display: none; /*Change this to flex *//*ok*/
+  display: none; /*Change this to flex */ /*ok*/
   margin: 0 auto;
   padding-bottom: 50px;
   width: 110px !important;
@@ -455,8 +454,6 @@ footer .fw-bold {
   font-weight: bold;
 }
 
-
-
 @media (max-width: 768px) {
   /* Styles to apply when screen width is 768px or smaller (e.g., mobile devices) */
   .table-container {
@@ -479,5 +476,3 @@ footer .fw-bold {
     /* Add any other styles for table cells on small screens */
   }
 }
-
-

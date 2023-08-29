@@ -63,7 +63,6 @@ body {
   animation: fadeOut 2s ease;
 }
 
-
 .c-checkbox {
   display: none;
 }
@@ -441,7 +440,7 @@ body {
   transition: 0.3s;
   z-index: 1;
 }
-#skipButton{
+#skipButton {
   font-size: 18px;
   padding: 10px 20px;
   background-color: #fff;
@@ -452,25 +451,24 @@ body {
   cursor: pointer;
 }
 
-#skipText{
-  font-size: 20px; 
-  color: white; 
+#skipText {
+  font-size: 20px;
+  color: white;
   z-index: 2;
 }
 
-.SkipShit{
-  text-align: center; 
+.SkipShit {
+  text-align: center;
   margin-top: 20px;
   z-index: 2;
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
   .large-text {
     font-size: 20px;
   }
-  
+
   .small-text {
     font-size: 10px; /* Change the font size to your desired value for the second line */
   }
-  
 }

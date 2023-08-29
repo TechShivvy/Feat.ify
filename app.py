@@ -127,7 +127,7 @@ def get_songs(artistName):
             ]
             if table == tables[0]:
                 for name, album in zip(obj["Title"], obj["Album"]):
-                    extra=""
+                    extra = ""
                     if name != album:
                         name, remix, artist = re.findall(
                             '^"(.*)"\s*(?:\[.*\])?\s*(\(.*\))?\s*(?:\[.*\])?\s*\((.*)\)',
@@ -141,7 +141,9 @@ def get_songs(artistName):
                         sql.append([name + " " + remix, artist, album, extra])
             else:
                 for name, artist, album in zip(
-                    obj["Title"], obj.get("Other artist(s)", [""] * len(obj["Title"])), obj["Album"]
+                    obj["Title"],
+                    obj.get("Other artist(s)", [""] * len(obj["Title"])),
+                    obj["Album"],
                 ):
                     name, remix = re.findall(
                         '^"(.*)"\s*(?:\[.*\])?\s*(\(.*\))?.*', name
@@ -209,7 +211,7 @@ def get_queries(song, artistName):
     song_name_without_remix = re.sub(
         r"\(remix\)|remix", "", song_name_original, flags=re.IGNORECASE
     ).strip()
-    lst=[]
+    lst = []
     if song[1].strip():
         lst += ['artist:"' + song[1].strip() + '"']
     if (
