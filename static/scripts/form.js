@@ -12,12 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 async function submitFormWithDelay() {
-  // Collect user input
   const username = document.getElementById("username").value.trim();
   console.log(username);
   const email = document.getElementById("femail").value.trim();
   console.log(email);
-  const age = document.getElementById("fage").value.trim(); // Corrected to "fage"
+  const age = document.getElementById("fage").value.trim();
   console.log(age);
 
   // Create a JSON object with the form data
@@ -27,7 +26,6 @@ async function submitFormWithDelay() {
     age: age,
   };
 
-  // Send the form data to the '/register' endpoint using fetch API
   await fetch("/register", {
     method: "POST",
     headers: {
@@ -38,42 +36,13 @@ async function submitFormWithDelay() {
     .then((response) => response.json())
     .then((data) => {
       console.log("Form submitted!");
-      console.log(data); // Print the response from the server
+      console.log(data);
       fadeWelcome();
     })
     .catch((error) => {
       console.error("Error submitting form:", error);
     });
 }
-
-//   function submitFormWithDelay() {
-//   const registrationForm = document.getElementById("registrationForm");
-//   registrationForm.submit();
-// }
-
-// function submitFormWithDelay() {
-//   const registrationForm = document.getElementById("registrationForm");
-
-//   // Collect user input (if needed)
-//   const username = document.getElementById("username").value;
-//   const email = document.getElementById("femail").value;
-//   const password = document.getElementById("fpass").value;
-
-//   console.log(username);
-//   console.log(email);
-//   console.log(password);
-
-//   // Replace this with your desired delay in milliseconds (e.g., 2000 for 2 seconds)
-//   const delay = 2000;
-
-//   // Add the delay using setTimeout
-//   setTimeout(function () {
-//     // Submit the form programmatically
-//     registrationForm.submit();
-
-//     window.location.href = "index.html";
-//   }, delay);
-// }
 
 function fadeWelcome() {
   const welcomeMessage = document.querySelector(".c-welcome");
@@ -85,7 +54,7 @@ function fadeWelcome() {
     welcomeMessage.style.display = "none";
     skipfucks.style.display="none";
 
-    // // Redirect to index.html after the animation is complete
+    // Redirect to index.html after the animation is complete
     window.location.href = "home";
   }, 2000); // Wait for 1 second (same as fadeOut animation duration) before hiding the elements and redirecting
 }
@@ -101,8 +70,7 @@ function skipStep() {
     formContainer.style.display = "none";
     skipText.style.display = "none";
     skipButton.style.display = "none";
-    // sessionStorage.setItem("leaveFormPage", "true");
-    window.location.href = "home"; // Replace 'index.html' with the path to your desired HTML file
+    window.location.href = "home";
   }, 1000);
 }
 
@@ -116,22 +84,4 @@ function reloadPageOnBack() {
   }
 }
 
-// Attach the event handler to the onpageshow event
 window.onpageshow = reloadPageOnBack;
-
-// function reloadPageOnBack() {
-//   if (sessionStorage.getItem("leaveFormPage") === "true") {
-//     sessionStorage.removeItem("leaveFormPage");
-//     window.location.href=("form"); // Redirect to the form page to start fresh
-//   }
-// }
-
-// // Attach the event handler to the onpageshow event
-// window.onpageshow = reloadPageOnBack;
-
-// window.addEventListener("pageshow", function (event) {
-//   // Clear the cache on page show
-//   if (event.persisted) {
-//     window.location.reload();
-//   }
-// });

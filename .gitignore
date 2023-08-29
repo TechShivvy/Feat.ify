@@ -2,7 +2,7 @@
 
 .vscode
 
-confirmMail.py
+#confirmMail.py
 
 #backup
 app-backup.py

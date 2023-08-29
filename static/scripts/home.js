@@ -40,25 +40,6 @@ function showSections() {
   });
 }
 
-// function showMenuBar() {
-//   $('#menuBar').css('transform', 'translateY(0)'); // Slide the menu bar down
-//   $('.container').css('padding', '50px');
-// }
-
-// function showSections() {
-//   $('.top-section').slideDown(500, function () {
-//     $('.middle-section').slideDown(500, function () {
-//       $('.bottom-section').slideDown(500, function () {
-//         // After the top section slides in, show the main content
-//         $('.container').fadeIn(500, function () {
-//           // After the main content fades in, show the menu bar
-//           showMenuBar();
-//         });
-//       });
-//     });
-//   });
-// }
-
 function showMainContent() {
   // Fade out the loading text first
   $("#loadingText").css("animation", "fade-out 1s forwards");
@@ -207,7 +188,7 @@ async function getTracks() {
   const dotsInterval = setInterval(displayDots, 1000);
   disableScroll();
 
-  let responseData; // Declare the variable here
+  let responseData;
   try {
     console.log("Sending request to /get_tracks...");
     const response = await fetch("/get_tracks");
@@ -234,7 +215,6 @@ async function getTracks() {
         setTimeout(function () {
           overlay.textContent = responseData.message;
           displayServerResponse(`${responseData.message}`, "partial");
-          // addErrorElement(overlay, "Some tracks failed to add.");
           const playlistIframe = addPlaylistIframe(
             responseData.playlist_id,
             "352"
@@ -246,22 +226,18 @@ async function getTracks() {
         console.log(responseData);
         overlay.textContent = responseData.message;
         displayServerResponse(`${responseData.message}`, "error");
-        // addErrorElement(overlay, responseData.message);
       } else {
         overlay.textContent = "Unexpected response from the server.";
         displayServerResponse("Unexpected response from the server.", "error");
-        // addErrorElement(overlay, "Unexpected response from the server.");
       }
     } else {
       console.error("Request failed:", response.status);
       overlay.textContent = "Request failed: " + response.status;
       displayServerResponse("Request failed: " + response.status, "error");
-      // addErrorElement(overlay, "Request failed: " + response.status);
     }
   } catch (error) {
     console.error("Error occurred:", error);
     displayServerResponse("Error occurred: " + error, "error");
-    // addErrorElement(overlay,"Error occurred: " + error)
   } finally {
     // Remove the overlay after a short delay
     const delayTime = responseData?.delay_time || 2000;
@@ -396,15 +372,6 @@ function removeActive(x) {
 function disableScroll() {
   document.body.classList.add("disable-scroll");
 }
-
-// Function to remove the 'disable-scroll' class from the body
 function enableScroll() {
   document.body.classList.remove("disable-scroll");
 }
-
-// function hardRefresh() {
-//   window.location.reload(true); // Pass true as a parameter to force a hard refresh
-// }
-
-// // Attach the event handler to the window.onunload event
-// window.onunload = hardRefresh;
