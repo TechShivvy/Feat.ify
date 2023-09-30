@@ -101,7 +101,7 @@ When creating the Spotify API key, users must specify the redirect URL. This URL
 
 
 ## Website
-You can try out our website at [featify.onrender.com](https://featify.onrender.com/)
+You can try out our website at [featify.onrender.com](https://featify.onrender.com/) (_takes few mins to load,sorry :p_)
 ## Authors
 
 - [@Hitesh](https://github.com/Hitesh1090)
